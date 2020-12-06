@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非零环绕，图片中心裁剪一个透明的圆</title>
+  <style type="text/css">
+    body {
+      background: rgb(138, 207, 214);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="300px" height="300px" />
+  <script>
+    const canvas = document.querySelector('#canvas');
+    const ctx = canvas.getContext('2d');
+    const img = document.createElement('img');
+    img.style.height = '300px'
+    img.style.width = '300px'
+    img.src = './20201206175253.jpg';
+    img.onload = function() {
+      ctx.beginPath();
+      ctx.rect(0, 0, 300, 300)    // 矩形路径
+      ctx.arc(150, 150, 50, 0, 2 * Math.PI, true);  // 逆时针圆形路径
+      ctx.closePath();
+      ctx.clip();   // 裁剪路径
+      ctx.drawImage(img, 0, 0, 300, 300);
+    }
+  </script>
+</body>
+
+</html>

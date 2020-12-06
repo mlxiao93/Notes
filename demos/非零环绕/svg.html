@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非零环绕，图片中心裁剪一个透明的圆</title>
+  <style type="text/css">
+    body {
+      background: rgb(138, 207, 214);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="300px" height="300px">
+    <clipPath id="cut-off">
+      <!-- 顺时针画个方，然后逆时针画个圆 -->
+      <path d="
+               M 0,0 
+               H 300 
+               V 300
+               H 0
+               Z
+
+               M 150,100
+               A 50 50 0 1 0 150 200
+               M 150,200
+               A 50 50 0 1 0 150 100
+               " />
+    </clipPath>
+    <image xlink:href="./20201206175253.jpg" clip-path="url(#cut-off)" width="300px" height="300px" />
+  </svg>
+</body>
+
+</html>

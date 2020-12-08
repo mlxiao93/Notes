@@ -1,5 +1,9 @@
 module.exports = {
-  rules: {
-    "react-hooks/rules-of-hooks": "off"
-  },
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "warn"
+  }
 }

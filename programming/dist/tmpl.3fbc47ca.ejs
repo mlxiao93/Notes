@@ -1,0 +1,11 @@
+<div>
+  <% if (users && users[0]) { %>
+    <h2><%= user[0].name %></h2>
+  <% } %>
+  
+  <ul>
+    <% users.forEach(function(user){ %>
+      <li><%= user.name %></li>
+    <% }); %>
+  </ul>
+</div>

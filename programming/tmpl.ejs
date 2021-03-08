@@ -1,0 +1,11 @@
+<div>
+  <% if (data && data[0]) { %>
+    <h2><%= data[0].name %></h2>
+  <% } %>
+  
+  <ul>
+    <% data.forEach(function(item){ %>
+      <li><%= item.name %></li>
+    <% }); %>
+  </ul>
+</div>

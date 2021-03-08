@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAAA,MAAM,CAAC;EACL,MAAM,EAAE,IAAI;EACZ,MAAM,EAAE,IAAI,GAGb","file":"linear-gradient.80ee2152.css","sourceRoot":"..","sourcesContent":[".block {\n  height: 52px;\n  margin: 32px;\n  // background: grey;\n  ;\n}"]}

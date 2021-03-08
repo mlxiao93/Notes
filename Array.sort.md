@@ -17,12 +17,14 @@
 ## 实现正确的`number[]`排序，需要传入`compareFunction`
 
 ```javascript
-> [5, 10, 2].sort((a, b) => a > b ? 1 : -1);
+> [5, 10, 2].sort((a, b) => a - b);    // 升序
 > [2, 5, 10]
+
+
+> [5, 10, 2].sort((a, b) => b - a);    // 降序
+> [10, 5, 2]
 ```
 
 + 如果 `compareFunction(a, b) < 0` ，a会排在b之前
 + 如果 `compareFunction(a, b) = 0` ，a和b的相对位置不变(备注：ECMAScript 标准并不保证这一行为)
 + 如果 `compareFunction(a, b) > 0` ，a会排在b之后
-
-可以理解为 `compareFunction(a, b) > 0` 执行交换，否则不交换

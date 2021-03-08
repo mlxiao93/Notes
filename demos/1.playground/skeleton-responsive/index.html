@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body style="margin: 0;">
+  <p>
+    通过不同视口下元素尺寸的比较，确定元素骨架图的尺寸
+  </p>
+  <p>
+    <div>元素在视口1的绝对尺寸记为 <code>width1, height1, top1, right1, bottom1, left1</code></div>
+    <div>元素在视口1的相对视口的百分比尺寸记为 <code>width1_p, height1_p, top1_p, right1_p, bottom1_p, left1_p</code></div>
+  </p>
+  <p>
+    <div>元素在视口2的绝对尺寸记为 <code>width2, height2, top2, right2, bottom2, left2</code></div>
+    <div>元素在视口2的相对视口的百分比尺寸记为 <code>width2_p, height2_p, top2_p, right2_p, bottom2_p, left2_p</code></div>
+  </p>
+  
+  <br>
+  <div style="background: rgb(86, 158, 114); min-height: 30px;color: #fff">
+    <code>left1 === left2, width1_p === width2_p, right1 === right2</code>
+
+    <p>三个值都相等，骨架屏取left、right</p>
+  </div>
+
+  <br>
+  <div style="margin: 0 20px ;background: rgb(86, 158, 114); min-height: 30px;color: #fff">
+    <code>left1 === left2, width1 !== width2 && width1_p !== width2_p, right1 === right2</code>
+
+    <p>left、right相等，骨架屏取left、right</p>
+  </div>
+
+  
+  <br>
+  <div style=" display: inline-block ;margin: 0 20px ;background: rgb(86, 158, 114);color: #fff">
+    <code>left1 === left2, width1 === width2, right1 !== right2 && right1_p !== right2_p</code>
+
+    <p>left、width相等，骨架屏取left、width</p>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <div style="display: flex; justify-content: center;">
+    <div style="background: rgb(86, 158, 114); min-height: 30px;color: #fff">
+      <code>left1 !== left2 && left1_p !== left2_p, width1 === width2, right1 === right2 && right1_p !== right2_p</code>
+      <p>只有width相等， 骨架屏取left=calc(100vw - ?)</p>
+    </div>
+  </div>
+
+  <br>
+  <br> 
+  <div style="width: 600px; min-height: 40px; padding: 32px; background: linear-gradient(90deg,rgb(190 190 190 / 20%) 25%,hsla(0,0%,50.6%,.24) 37%,hsla(0,0%,74.5%,.2) 63%); background-size: 400% 100%;">
+    <div style="min-height: 40px; padding: 32px; background: linear-gradient(90deg,rgb(190 190 190 / 20%) 25%,hsla(0,0%,50.6%,.24) 37%,hsla(0,0%,74.5%,.2) 63%); background-size: 400% 100%;">
+      <div style="min-height: 40px; padding: 32px; background: linear-gradient(90deg,rgb(190 190 190 / 20%) 25%,hsla(0,0%,50.6%,.24) 37%,hsla(0,0%,74.5%,.2) 63%); background-size: 400% 100%;">
+        <div style="min-height: 40px; padding: 32px; background: linear-gradient(90deg,rgb(190 190 190 / 20%) 25%,hsla(0,0%,50.6%,.24) 37%,hsla(0,0%,74.5%,.2) 63%); background-size: 400% 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <script src="./index.ts"></script>
+</body>
+</html>

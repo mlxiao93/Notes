@@ -4,6 +4,5 @@ const foo: {
   a: 1
 }
 
-exports.foo = foo;
 
 // export foo

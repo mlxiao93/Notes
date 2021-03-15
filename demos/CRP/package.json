@@ -1,0 +1,18 @@
+{
+  "name": "CRP",
+  "version": "1.0.0",
+  "description": "CRP: 关键渲染路径",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "http2": "^3.3.7",
+    "spdy": "^4.0.2"
+  }
+}

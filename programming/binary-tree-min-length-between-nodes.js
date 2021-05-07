@@ -20,23 +20,13 @@ nodes[4].right = nodes[9];
 nodes[6].left = nodes[10];
 nodes[6].right = nodes[11];
 
+function maxDepth(root) {
+  if (!root) return 0;
+  return Math.max(maxDepth(root.left, root.right)) + 1;
+}
 
-// function traverse(root) {
-//   const queue = [root];
 
-//   while(queue.length) {
-//     const head = queue.pop();
-//     console.log(head.val);
-//     if (head.left) {
-//       queue.unshift(head.left)
-//     }
-//     if (head.right) {
-//       queue.unshift(head.right)
-//     }
-//   }
 
-// }
-// traverse(nodes[1])
 
 /**
  * q与q之间的最短路径长度
@@ -52,16 +42,17 @@ function getMinLength(root, p, q) {
 }
 
 /**
- * p与q之前最近的共同祖先
+ * p与q之间最近的共同祖先
  */
 function getClosestCommonParent(root, p, q) {
   if (!root) return null;
   if (root.val === p.val || root.val === q.val) return root;
   const left = getClosestCommonParent(root.left, p, q);
   const right = getClosestCommonParent(root.right, p, q);
-  if (!left) return right;
-  if (!right) return left;
-  return root;
+  if (left && right) return root;
+  if (left) return left;
+  if (right) return right;
+  return null;
 }
 
 /**
@@ -71,14 +62,46 @@ function getPath(root, target, path = []) {
   if (!root) return
   path.push(root);
   if (root.val === target.val) return path;
-  let findInLeft = getPath(root.left, target, path);
-  let findInRight = getPath(root.right, target, path);
-  if (!findInLeft && !findInRight) {
+  let leftPath = getPath(root.left, target, path);
+  let rightPath = getPath(root.right, target, path);
+  if (!leftPath && !rightPath) {
     path.pop();
     return;
   };
   return path;
 }
 
-console.log(getMinLength(nodes[1], nodes[8], nodes[5]));
 
+function getPath2(root, target, path = []) {
+  if (!root) return null;
+  if (root.val === target.val) {
+    path.unshift(root);
+    return path;
+  };
+
+  const leftPath = getPath2(root.left, target, path);
+  const rightPath = getPath2(root.right, target, path);
+
+  if (leftPath || rightPath) {
+    path.unshift(root);
+    return path;
+  };
+
+  return null
+}
+
+function allPaths(root, path = [], pathes = []) {
+  if (!root) {
+    pathes.push(path);
+    return pathes;
+  };
+  path.push(root);
+  allPaths(root.left, [...path], pathes);
+  allPaths(root.right, [...path], pathes);
+  return pathes;
+}
+
+// console.log(allPaths(nodes[1]));
+// console.log(getPath2(nodes[1], nodes[9]))
+
+// console.log(getMinLength(nodes[1], nodes[8], nodes[5]));

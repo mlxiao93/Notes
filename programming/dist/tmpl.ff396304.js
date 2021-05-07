@@ -126,27 +126,23 @@ var _fs = _interopRequireDefault(require("fs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var input = "<div>\n  <% if (data && data[0]) { %>\n    <h2><%= data[0].name %></h2>\n  <% } %>\n  \n  <ul>\n    <% data.forEach(function(item){ %>\n      <li><%= item.name %></li>\n    <% }); %>\n  </ul>\n</div>";
+var tmpl = "<div>\n  <% if (data && data[0]) { %>\n    <h2><%= data[0].name %></h2>\n  <% } %>\n  \n  <ul>\n    <% data.forEach(function(item){ %>\n      <li><%= item.name %></li>\n    <% }); %>\n  </ul>\n</div>";
 /**
  * 实现一个简易模板引擎
  * 
  * 整个过程就是在拼接html
  */
 
-function tmpl(input, data) {
-  var code = "const result = [];";
-  code += "result.push(`".concat(input.replace(/<%=(.+?)%>/g, '`); result.push($1); result.push(`').replace(/<%(.+?)%>/g, '`); $1 result.push(`'), "`);");
-  code += "return result.join('');";
-  console.log(code);
+function compileTmpl(tmpl, data) {
+  var code = "\n    const res = [];\n    res.push(`".concat(tmpl.replace(/<%=(.+?)%>/g, "`);res.push($1);res.push(`").replace(/<%(.+?)%>/g, "`);$1res.push(`"), "`);\n    return res.join('');\n  ");
   return new Function('data', code)(data);
 }
 
-var html = tmpl(input, [{
+var html = compileTmpl(tmpl, [{
   name: '张三'
 }, {
   name: '李四'
-}]);
-console.log(html);
+}]); // console.log(html)
 },{"fs":"../../../../.nvm/versions/node/v10.16.0/lib/node_modules/parcel-bundler/src/builtins/_empty.js"}],"../../../../.nvm/versions/node/v10.16.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -175,7 +171,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51925" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53794" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

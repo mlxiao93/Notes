@@ -118,6 +118,18 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"binary-tree-min-length-between-nodes.js":[function(require,module,exports) {
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 /**
  * 给定一个二叉树, 找到该树中两个指定节点间的最短距离
  */
@@ -138,24 +150,16 @@ nodes[3].right = nodes[7];
 nodes[4].left = nodes[8];
 nodes[4].right = nodes[9];
 nodes[6].left = nodes[10];
-nodes[6].right = nodes[11]; // function traverse(root) {
-//   const queue = [root];
-//   while(queue.length) {
-//     const head = queue.pop();
-//     console.log(head.val);
-//     if (head.left) {
-//       queue.unshift(head.left)
-//     }
-//     if (head.right) {
-//       queue.unshift(head.right)
-//     }
-//   }
-// }
-// traverse(nodes[1])
+nodes[6].right = nodes[11];
 
+function maxDepth(root) {
+  if (!root) return 0;
+  return Math.max(maxDepth(root.left, root.right)) + 1;
+}
 /**
  * q与q之间的最短路径长度
  */
+
 
 function getMinLength(root, p, q) {
   // 1. 先计算最近的共同祖先
@@ -166,7 +170,7 @@ function getMinLength(root, p, q) {
   return pathP.length + pathQ.length - 2;
 }
 /**
- * p与q之前最近的共同祖先
+ * p与q之间最近的共同祖先
  */
 
 
@@ -175,9 +179,10 @@ function getClosestCommonParent(root, p, q) {
   if (root.val === p.val || root.val === q.val) return root;
   var left = getClosestCommonParent(root.left, p, q);
   var right = getClosestCommonParent(root.right, p, q);
-  if (!left) return right;
-  if (!right) return left;
-  return root;
+  if (left && right) return root;
+  if (left) return left;
+  if (right) return right;
+  return null;
 }
 /**
  * root到target的路径
@@ -189,10 +194,10 @@ function getPath(root, target) {
   if (!root) return;
   path.push(root);
   if (root.val === target.val) return path;
-  var findInLeft = getPath(root.left, target, path);
-  var findInRight = getPath(root.right, target, path);
+  var leftPath = getPath(root.left, target, path);
+  var rightPath = getPath(root.right, target, path);
 
-  if (!findInLeft && !findInRight) {
+  if (!leftPath && !rightPath) {
     path.pop();
     return;
   }
@@ -201,7 +206,45 @@ function getPath(root, target) {
   return path;
 }
 
-console.log(getMinLength(nodes[1], nodes[8], nodes[5]));
+function getPath2(root, target) {
+  var path = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  if (!root) return null;
+
+  if (root.val === target.val) {
+    path.unshift(root);
+    return path;
+  }
+
+  ;
+  var leftPath = getPath2(root.left, target, path);
+  var rightPath = getPath2(root.right, target, path);
+
+  if (leftPath || rightPath) {
+    path.unshift(root);
+    return path;
+  }
+
+  ;
+  return null;
+}
+
+function allPaths(root) {
+  var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var pathes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+  if (!root) {
+    pathes.push(path);
+    return pathes;
+  }
+
+  ;
+  path.push(root);
+  allPaths(root.left, _toConsumableArray(path), pathes);
+  allPaths(root.right, _toConsumableArray(path), pathes);
+  return pathes;
+} // console.log(allPaths(nodes[1]));
+// console.log(getPath2(nodes[1], nodes[9]))
+// console.log(getMinLength(nodes[1], nodes[8], nodes[5]));
 },{}],"../../../../.nvm/versions/node/v10.16.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -230,7 +273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51006" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53794" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

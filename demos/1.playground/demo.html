@@ -1,11 +1,57 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="./demo.scss">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      display: flex;
+    }
+    .left {
+      width: 200px;
+    }
+    .right {
+      flex: 1
+    }
+
+    
+    
+    .container {
+      width: 100vw;
+    }
+    .left {
+      width: 200px;
+      height: 100px;
+      background: red;
+      display: table-cell;
+    }
+    .right {
+      background: grey;
+      width: 100%;
+      display: table-cell;
+    }
+
+    .left {
+      width: 100px;
+      float: left;
+      background: red;
+    }
+    .right {
+      background: grey;
+    }
+
+  </style>
 </head>
-
 <body>
-  <script src="./demo.ts"></script>
+  <div class="container">
+    <div class="left">
+      left
+    </div>
+    <div class="right">
+      right
+    </div>
+  </div>
 </body>
-
 </html>

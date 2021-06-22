@@ -8,7 +8,7 @@
   </head>
   <body>
     <canvas id="c"></canvas>
-    <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+    <!-- <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script> -->
     <script type="x-shader/x-vertex" id="vertex-shader-2d">
       // 一个属性值，将会从缓冲中获取数据
       attribute vec4 a_position;
@@ -30,8 +30,8 @@
       }
     </script>
     <script>
-      var canvas = document.querySelector("#c");
-      var gl = canvas.getContext("webgl");
+      var canvas = document.querySelector('#c');
+      var gl = canvas.getContext('webgl');
 
       // 创建着色器方法，输入参数：渲染上下文，着色器类型，数据源
       function createShader(gl, type, source) {
@@ -47,9 +47,9 @@
       }
 
       // 创建两个着色器
-      var vertexShaderSource = document.querySelector("#vertex-shader-2d").text;
+      var vertexShaderSource = document.querySelector('#vertex-shader-2d').text;
       var fragmentShaderSource = document.querySelector(
-        "#fragment-shader-2d"
+        '#fragment-shader-2d'
       ).text;
 
       var vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
@@ -77,16 +77,16 @@
       // 从刚才创建的GLSL着色程序中找到a_position这个属性
       var positionAttributeLocation = gl.getAttribLocation(
         program,
-        "a_position"
+        'a_position'
       );
 
       // 属性值从缓冲中获取数据，所以我们创建一个缓冲
       var positionBuffer = gl.createBuffer();
 
-      // 绑定位置信息缓冲
+      // 绑定缓冲
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
-      // 通过绑定点向缓冲中存放数据
+      // 向缓冲中存放数据
       var positions = [0, 0, 0, 0.5, 0.7, 0];
       gl.bufferData(
         gl.ARRAY_BUFFER,
@@ -95,22 +95,19 @@
       );
 
       // 渲染
-      webglUtils.resizeCanvasToDisplaySize(gl.canvas);
+      // webglUtils.resizeCanvasToDisplaySize(gl.canvas);
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
       // 清空画布
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
-      // 告诉它用我们之前写好的着色程序（一个着色器对）
+
+      // 使用着色程序
       gl.useProgram(program);
 
-      // 启用对应属性
+      // 启用属性
       gl.enableVertexAttribArray(positionAttributeLocation);
 
-      // 指定从缓冲中读取数据的方式
-      // 将绑定点绑定到缓冲数据（positionBuffer）
-      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-
-      // 告诉属性怎么从positionBuffer中读取数据 (ARRAY_BUFFER)
+      // 告诉属性怎么从positionBuffer中读取数据
       var size = 2; // 每次迭代运行提取两个单位数据
       var type = gl.FLOAT; // 每个单位的数据类型是32位浮点型
       var normalize = false; // 不需要归一化数据
@@ -126,12 +123,11 @@
         offset
       );
 
-      // 运行着色程序了。
+      // 运行着色程序
       var primitiveType = gl.TRIANGLES;
       var offset = 0;
       var count = 3;
       gl.drawArrays(primitiveType, offset, count);
-
     </script>
   </body>
 </html>
